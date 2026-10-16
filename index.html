@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Salesforce for Contractors | Process IQ Automation</title>
+<meta name="description" content="End-to-end Salesforce Sales Cloud builds for construction, HVAC, roofing, remodeling and home-service contractors: lead capture, dispatch, estimates, jobs, service agreements and reporting."/>
+<link rel="icon" type="image/png" sizes="32x32" href="https://processiqautomation.com/favicon-32.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#F4F2EE; --surface:#FFFFFF; --ink:#141B24; --ink2:#2A3441; --muted:#5E6873; --line:#DCD8D0; --line2:#E9E6E0;
+  --orange:#E2571E; --orange-ink:#B8410F; --orange-soft:#FCEADF;
+  --steel:#1F3A5F; --steel-soft:#E6EDF5; --sf:#0B5CAB; --sf-soft:#EAF3FC;
+  --good:#2E7D4F; --good-bg:#E3F2E8; --warn:#8A5A00; --warn-bg:#FFF3D6;
+  --display:"Archivo",system-ui,sans-serif; --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:16px}
+@media (min-width:760px){.wrap{padding-inline:32px}}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange-ink);margin:0 0 12px;display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:22px;height:2px;background:var(--orange)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.02em;margin:0}
+h2{font-size:clamp(28px,3.6vw,40px);line-height:1.08;font-weight:800}
+.lead{color:var(--muted);font-size:17px;max-width:62ch;margin:14px 0 0}
+section{padding:72px 0;scroll-margin-top:70px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:6px;font-weight:600;font-size:15px;text-decoration:none;border:2px solid transparent;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-o{background:var(--orange);color:#fff}
+.btn-o:hover{background:var(--orange-ink)}
+.btn-g{border-color:currentColor}
+.btn:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:rgba(244,242,238,.92);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:17px}
+.brand i{width:28px;height:28px;border-radius:6px;background:var(--ink);display:grid;place-items:center;color:var(--orange);font-style:normal;font-size:13px}
+.brand small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--muted);font-weight:500;margin-top:-3px}
+.nav nav{display:flex;gap:22px;font-size:14px}
+.nav nav a{text-decoration:none;color:var(--ink2)}
+.nav nav a:hover{color:var(--orange-ink)}
+@media (max-width:900px){.nav nav{display:none}}
+.nav .btn{padding:9px 14px;font-size:14px}
+
+/* hero */
+.hero{position:relative;background:var(--ink);color:#fff;overflow:hidden;padding:76px 0 64px}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(ellipse at 70% 30%,#000 30%,transparent 75%)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:44px;align-items:center}
+@media (max-width:980px){.hero .wrap{grid-template-columns:minmax(0,1fr)}}
+.hero .kicker{color:#F6A27C}
+.hero h1{font-size:clamp(36px,5.4vw,64px);line-height:1.02;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero p.sub{color:#B9C2CD;font-size:18px;max-width:54ch;margin:18px 0 26px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero .btn-g{color:#fff;border-color:#3A4656}
+.trades{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
+.trades span{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#C9D1DA;border:1px solid #344152;border-radius:999px;padding:6px 11px}
+.proof{display:flex;gap:22px 26px;flex-wrap:wrap;margin-top:30px;padding-top:22px;border-top:1px solid #2A3646}
+.proof div{font-size:13px;color:#9AA6B3}
+.proof b{display:block;font-family:var(--display);font-size:22px;color:#fff}
+@media (max-width:620px){.proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.proof b{font-size:16px}.proof div{font-size:12px}}
+
+/* mock salesforce window */
+.sfw{background:#F3F3F3;border-radius:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);overflow:hidden;color:#181818;font-size:13px;border:1px solid #2B3644}
+.sfw .bar{background:#fff;display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid #E5E5E5}
+.sfw .dots{display:flex;gap:5px}.sfw .dots i{width:9px;height:9px;border-radius:50%;background:#DDD;display:block}
+.sfw .app{white-space:nowrap;font-weight:600;color:var(--sf);display:flex;align-items:center;gap:6px}
+.sfw .app svg{width:18px;height:18px}
+.sfw .tabsb{display:flex;gap:12px;margin-left:8px;color:#444;font-size:12px;overflow:hidden;white-space:nowrap}
+.sfw .tabsb span.on{color:var(--sf);box-shadow:inset 0 -2px 0 var(--sf);padding-bottom:3px}
+.sfw .rec{padding:12px}
+.sfw .hdr{background:#fff;border:1px solid #E5E5E5;border-radius:6px;padding:12px;display:flex;align-items:center;gap:10px}
+.sfw .ic{width:30px;height:30px;border-radius:5px;background:var(--orange);display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px;flex:none}
+.sfw .hdr .t{font-size:11px;color:#666}
+.sfw .hdr .n{font-weight:700;font-size:15px}
+.sfw .hdr .acts{margin-left:auto;display:flex;gap:6px}
+.sfw .hdr .acts span{border:1px solid #C9C9C9;border-radius:4px;padding:3px 8px;font-size:11px;background:#fff;color:var(--sf)}
+.path{display:flex;margin:10px 0;background:#fff;border:1px solid #E5E5E5;border-radius:6px;padding:6px;gap:3px;overflow:hidden}
+.path span{flex:1;text-align:center;font-size:10.5px;padding:6px 4px;background:#ECEBEA;color:#3E3E3C;clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%,7px 50%);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .3s,color .3s}
+.path span:first-child{clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%);border-radius:4px 0 0 4px}
+.path span.done{background:#4BCA81;color:#fff}
+.path span.cur{background:var(--sf);color:#fff;font-weight:600}
+.cols{display:grid;grid-template-columns:1.25fr 1fr;gap:10px}
+@media (max-width:520px){.cols{grid-template-columns:1fr}.sfw .tabsb{display:none}}
+.card{background:#fff;border:1px solid #E5E5E5;border-radius:6px;padding:10px 12px}
+.card h4{margin:0 0 8px;font-size:12px;font-family:var(--body);display:flex;justify-content:space-between}
+.card h4 small{color:var(--sf);font-weight:500}
+.fl{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px}
+.fl div{font-size:10.5px;color:#706E6B}
+.fl b{display:block;font-size:12px;color:#181818;font-weight:500}
+.act{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid #F0F0F0;font-size:11.5px}
+.act:first-of-type{border-top:0}
+.act i{width:18px;height:18px;border-radius:4px;display:grid;place-items:center;color:#fff;font-style:normal;font-size:10px;flex:none}
+.act small{display:block;color:#706E6B;font-size:10.5px}
+.toast{margin-top:10px;background:#fff;border-left:4px solid #4BCA81;border-radius:6px;padding:8px 10px;font-size:11.5px;display:flex;gap:8px;align-items:center;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+
+/* trade switcher */
+.switch{display:flex;gap:8px;flex-wrap:wrap;margin:28px 0 24px}
+.switch button{all:unset;cursor:pointer;padding:11px 16px;border-radius:6px;background:var(--surface);border:1px solid var(--line);font-weight:600;font-size:15px;display:flex;align-items:center;gap:8px}
+.switch button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.switch button svg{width:18px;height:18px}
+.tradebox{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+@media (max-width:900px){.tradebox{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px}
+.panel h3{font-size:19px;margin-bottom:6px}
+.panel p.d{color:var(--muted);margin:0 0 16px;font-size:15px}
+.pipe{display:flex;flex-direction:column;gap:8px}
+.pipe .st{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start}
+.pipe .st b{width:28px;height:28px;border-radius:50%;background:var(--orange-soft);color:var(--orange-ink);font-family:var(--mono);font-size:12px;display:grid;place-items:center}
+.pipe .st div{font-weight:600;font-size:15px}
+.pipe .st small{display:block;color:var(--muted);font-weight:400;font-size:13.5px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{background:var(--steel-soft);color:var(--steel);border-radius:6px;padding:6px 10px;font-size:13.5px;font-weight:500}
+.autos{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.autos li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:14.5px}
+.autos li svg{width:20px;height:20px;color:var(--orange);margin-top:2px}
+.sub2{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:18px 0 10px}
+.fade{animation:fade .35s ease-out}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* lifecycle */
+.life{background:var(--ink);color:#fff}
+.life .lead{color:#B9C2CD}
+.life h2{color:#fff}
+.flow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;margin-top:36px;counter-reset:s}
+@media (max-width:1050px){.flow{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:18px}}
+@media (max-width:620px){.flow{grid-template-columns:minmax(0,1fr)}}
+.flow .s{position:relative;padding:18px 16px 18px;border-top:3px solid #2E3B4C}
+.flow .s::before{counter-increment:s;content:"0" counter(s);font-family:var(--mono);font-size:12px;color:var(--orange);display:block;margin-bottom:8px}
+.flow .s::after{content:"";position:absolute;top:-8px;left:16px;width:13px;height:13px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 4px var(--ink)}
+.flow h3{font-size:17px;margin-bottom:6px}
+.flow p{margin:0 0 10px;color:#AEB8C4;font-size:13.5px}
+.flow .tg{display:flex;flex-wrap:wrap;gap:5px}
+.flow .tg span{font-size:11px;font-family:var(--mono);color:#E6EAF0;border:1px solid #384658;border-radius:4px;padding:2px 6px}
+
+/* capabilities */
+.caps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:32px}
+@media (max-width:980px){.caps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.caps{grid-template-columns:minmax(0,1fr)}}
+.cap{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;transition:border-color .2s,transform .2s}
+.cap:hover{border-color:var(--orange);transform:translateY(-2px)}
+.cap .ico{width:42px;height:42px;border-radius:8px;background:var(--orange-soft);color:var(--orange-ink);display:grid;place-items:center;margin-bottom:14px}
+.cap .ico svg{width:22px;height:22px}
+.cap h3{font-size:18px;margin-bottom:8px}
+.cap p{margin:0 0 12px;color:var(--muted);font-size:14.5px}
+.cap ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink2)}
+.cap li{margin:0 0 4px}
+
+/* data model */
+.model{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:32px;align-items:center}
+@media (max-width:980px){.model{grid-template-columns:minmax(0,1fr)}}
+.erd{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;background-image:linear-gradient(var(--line2) 1px,transparent 1px),linear-gradient(90deg,var(--line2) 1px,transparent 1px);background-size:24px 24px}
+.erd svg{width:100%;height:auto;display:block}
+.erd text{font-family:var(--body)}
+
+/* case study */
+.case{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+@media (max-width:980px){.case{grid-template-columns:minmax(0,1fr)}}
+.case .l{background:var(--steel);color:#fff;padding:32px}
+.case .l .kicker{color:#F6A27C}
+.case .l h3{font-size:28px;line-height:1.1;margin-bottom:14px}
+.case .l p{color:#C8D3E0;margin:0 0 18px}
+.case .l dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0;font-size:14px}
+.case .l dt{color:#93A6BD;font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;padding-top:3px}
+.case .l dd{margin:0}
+.case .r{padding:32px}
+.case .r h4{font-family:var(--display);font-size:18px;margin:0 0 14px}
+.built{display:grid;gap:14px}
+.built div{display:grid;grid-template-columns:34px 1fr;gap:12px}
+.built b{width:34px;height:34px;border-radius:8px;background:var(--orange-soft);color:var(--orange-ink);display:grid;place-items:center;font-family:var(--mono);font-size:12px}
+.built p{margin:0;font-size:14.5px;color:var(--ink2)}
+.built p strong{display:block;font-size:15.5px;color:var(--ink)}
+.res{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.res span{background:var(--good-bg);color:var(--good);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600}
+
+/* dashboard */
+.dash{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+@media (max-width:980px){.dash{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.kpi .k{font-size:13px;color:var(--muted);margin:0 0 6px}
+.kpi .v{font-family:var(--display);font-size:clamp(24px,3vw,32px);font-weight:800;margin:0;line-height:1.05;font-variant-numeric:tabular-nums}
+.kpi .d{font-size:12.5px;color:var(--good);margin:6px 0 0;font-weight:600}
+.charts{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px;margin-top:14px}
+@media (max-width:900px){.charts{grid-template-columns:minmax(0,1fr)}}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;position:relative}
+.chart h4{margin:0;font-size:15px;font-family:var(--display)}
+.chart p{margin:2px 0 12px;font-size:13px;color:var(--muted)}
+.funnel{display:grid;gap:8px}
+.funnel .row{display:grid;grid-template-columns:130px 1fr 52px;gap:10px;align-items:center;font-size:13.5px}
+@media (max-width:480px){.funnel .row{grid-template-columns:96px 1fr 44px;font-size:12.5px}}
+.funnel .bar{height:22px;background:var(--line2);border-radius:4px;overflow:hidden}
+.funnel .bar i{display:block;height:100%;background:var(--steel);border-radius:4px;transition:width .9s cubic-bezier(.2,.7,.2,1)}
+.funnel .row:last-child .bar i{background:var(--orange)}
+.funnel .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.src{display:grid;gap:10px}
+.src .row{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:13.5px}
+.src .row .bar{grid-column:1/-1;height:8px;background:var(--line2);border-radius:4px;overflow:hidden}
+.src .row .bar i{display:block;height:100%;background:var(--steel);border-radius:4px}
+.src .row b{font-variant-numeric:tabular-nums}
+.note{font-size:12.5px;color:var(--muted);margin-top:12px}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:30px}
+@media (max-width:1050px){.steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:620px){.steps{grid-template-columns:minmax(0,1fr)}}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px}
+.step .w{font-family:var(--mono);font-size:11.5px;color:var(--orange-ink);text-transform:uppercase;letter-spacing:.08em}
+.step h3{font-size:17px;margin:6px 0 6px}
+.step p{margin:0;font-size:14px;color:var(--muted)}
+
+/* packages */
+.packs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px}
+@media (max-width:980px){.packs{grid-template-columns:minmax(0,1fr)}}
+.pack{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column}
+.pack.hl{border:2px solid var(--orange);position:relative}
+.pack.hl::before{content:"Most chosen";position:absolute;top:-12px;left:22px;background:var(--orange);color:#fff;font-size:11.5px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:4px}
+.pack h3{font-size:20px}
+.pack .for{color:var(--muted);font-size:14px;margin:6px 0 14px}
+.pack ul{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:8px;font-size:14.5px}
+.pack li{padding-left:24px;position:relative}
+.pack li::before{content:"";position:absolute;left:0;top:7px;width:12px;height:7px;border-left:2px solid var(--orange);border-bottom:2px solid var(--orange);transform:rotate(-45deg)}
+.pack .time{margin-top:auto;font-family:var(--mono);font-size:12px;color:var(--steel);text-transform:uppercase;letter-spacing:.06em;border-top:1px solid var(--line);padding-top:12px}
+
+/* integrations */
+.ints{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.ints span{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-weight:500;font-size:14.5px;display:flex;gap:8px;align-items:center}
+.ints span i{width:8px;height:8px;border-radius:50%;background:var(--orange);display:block}
+
+/* faq */
+.faq{max-width:860px;margin-top:24px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;padding:0 18px}
+.faq summary{cursor:pointer;list-style:none;padding:16px 0;font-weight:600;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--orange-ink);font-size:18px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin:0 0 16px;color:var(--muted)}
+
+/* cta */
+.cta{background:var(--orange);color:#fff;border-radius:14px;padding:36px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.cta h2{color:#fff;max-width:20ch}
+.cta p{margin:10px 0 0;color:#FFE3D6;max-width:56ch}
+.cta .btn-w{background:#fff;color:var(--orange-ink)}
+.cta .btn-g{color:#fff}
+footer{padding:36px 0 44px;color:var(--muted);font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:22px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><i>IQ</i><span>Process IQ<small>AUTOMATION</small></span></a>
+    <nav aria-label="Sections"><a href="#trades">By trade</a><a href="#lifecycle">End-to-end</a><a href="#build">What I build</a><a href="#case">Case study</a><a href="#process">Process</a></nav>
+    <a class="btn btn-o" href="https://processiqautomation.com/contact" target="_blank" rel="noopener">Book a call</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="kicker">Salesforce Sales Cloud · Construction &amp; home services</p>
+      <h1>Salesforce built for contractors. From <em>first call</em> to <em>final invoice</em>.</h1>
+      <p class="sub">I design, build and run Salesforce for construction, HVAC, roofing and remodeling companies, so every lead is followed up, every site visit is booked, every estimate is tracked and every service agreement renews on time.</p>
+      <div class="ctas"><a class="btn btn-o" href="https://processiqautomation.com/contact" target="_blank" rel="noopener">Book a 20-min CRM review →</a><a class="btn btn-g" href="#trades">See it for your trade</a></div>
+      <div class="trades"><span>General contractors</span><span>HVAC</span><span>Roofing</span><span>Remodeling</span><span>Electrical</span><span>Plumbing</span><span>Solar &amp; energy</span></div>
+      <div class="proof"><div><b>End-to-end</b>Lead to service agreement</div><div><b>Native first</b>Flows, LWC, Experience Cloud</div><div><b>Weekly</b>Reporting you can check</div></div>
+    </div>
+
+    <div class="sfw" aria-label="Example Salesforce record for a contractor">
+      <div class="bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="app"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M10 5.5a4.3 4.3 0 0 1 7 1.2 5 5 0 0 1 6 4.8 5 5 0 0 1-6.2 4.8 3.9 3.9 0 0 1-5.5 1.7 4.6 4.6 0 0 1-8.5-.3A4.2 4.2 0 0 1 1 10a4.3 4.3 0 0 1 6.3-3.8A4 4 0 0 1 10 5.5z"/></svg>Contractor CRM</span>
+        <span class="tabsb"><span>Leads</span><span class="on">Opportunities</span><span>Site Visits</span><span>Jobs</span><span>Dashboards</span></span></div>
+      <div class="rec">
+        <div class="hdr"><span class="ic" aria-hidden="true">OP</span><div><div class="t">Opportunity</div><div class="n" id="mkName">Ramos Residence · HVAC Replacement</div></div><div class="acts"><span>Send Quote</span><span>Book Visit</span></div></div>
+        <div class="path" id="mkPath" aria-label="Sales stage"></div>
+        <div class="cols">
+          <div class="card"><h4>Details <small>Edit</small></h4>
+            <div class="fl" id="mkFields"></div></div>
+          <div class="card"><h4>Activity <small>All</small></h4><div id="mkAct"></div></div>
+        </div>
+        <div class="toast" id="mkToast"><span aria-hidden="true">✓</span><span>Flow: SMS confirmation sent to customer and tech</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trades">
+  <div class="wrap">
+    <p class="kicker">Customised by trade</p>
+    <h2>Not a generic CRM. Built around how your trade sells and works.</h2>
+    <p class="lead">Every trade has a different sales cycle. Pick yours to see the pipeline, the custom records and the automations I'd set up.</p>
+    <div class="switch" role="group" aria-label="Choose a trade" id="switch"></div>
+    <div class="tradebox" id="tradebox"></div>
+  </div>
+</section>
+
+<section class="life" id="lifecycle">
+  <div class="wrap">
+    <p class="kicker">End-to-end solution</p>
+    <h2>One connected system, from the first ad click to the repeat customer.</h2>
+    <p class="lead">Most contractors have a CRM, a scheduling tool, spreadsheets and a phone system that don't talk to each other. I connect the whole journey in Salesforce.</p>
+    <div class="flow">
+      <div class="s"><h3>Capture</h3><p>Every web form, ad lead, call and referral lands in one place, de-duplicated.</p><div class="tg"><span>Web-to-Lead</span><span>Google/Meta Ads</span><span>Call tracking</span></div></div>
+      <div class="s"><h3>Qualify &amp; route</h3><p>Leads are scored and assigned by territory, trade and capacity in seconds.</p><div class="tg"><span>Assignment Flows</span><span>Round robin</span></div></div>
+      <div class="s"><h3>Site visit</h3><p>Visits booked on the rep's calendar with SMS confirmations and reminders.</p><div class="tg"><span>Calendar sync</span><span>SMS</span></div></div>
+      <div class="s"><h3>Estimate &amp; quote</h3><p>Line items, options, financing and e-signature from the Opportunity.</p><div class="tg"><span>Quotes</span><span>E-signature</span></div></div>
+      <div class="s"><h3>Win &amp; hand off</h3><p>Closed Won creates the Job, permits checklist and crew handoff automatically.</p><div class="tg"><span>Job object</span><span>Tasks</span></div></div>
+      <div class="s"><h3>Deliver</h3><p>Milestones, change orders and customer updates tracked to completion.</p><div class="tg"><span>Change orders</span><span>Portal</span></div></div>
+      <div class="s"><h3>Retain</h3><p>Reviews, referrals, warranties and maintenance plans that renew themselves.</p><div class="tg"><span>Agreements</span><span>Renewals</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="build">
+  <div class="wrap">
+    <p class="kicker">What I build</p>
+    <h2>Every layer of Salesforce, configured for field businesses.</h2>
+    <p class="lead">Clicks before code. I use native Salesforce features first, and add custom components only when they clearly pay off.</p>
+    <div class="caps">
+      <div class="cap"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7"/></svg></div><h3>Sales pipeline setup</h3><p>Lead, Account, Opportunity and Quote processes that match how your team actually sells.</p><ul><li>Trade-specific stages &amp; paths</li><li>Record types per service line</li><li>Validation rules that protect data</li></ul></div>
+      <div class="cap"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><h3>Flow automation</h3><p>Record-triggered and scheduled Flows that remove manual follow-up.</p><ul><li>Lead routing &amp; speed-to-lead alerts</li><li>Visit booking, reminders, no-show recovery</li><li>Closed Won → Job &amp; task handoff</li></ul></div>
+      <div class="cap"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg></div><h3>Custom objects &amp; data model</h3><p>Records for what you really manage, linked cleanly to accounts and deals.</p><ul><li>Site Visits, Jobs, Change Orders</li><li>Equipment / Assets &amp; warranties</li><li>Maintenance Agreements</li></ul></div>
+      <div class="cap"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></div><h3>Experience Cloud portals</h3><p>Secure portals for field reps, subcontractors or homeowners, no full licence needed.</p><ul><li>Rep portal for visit results</li><li>Tokenised customer feedback forms</li><li>Project status for homeowners</li></ul></div>
+      <div class="cap"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></div><h3>Lightning components</h3><p>Lightning Web Components where a standard page isn't enough.</p><ul><li>Visit &amp; job timeline views</li><li>One-click actions for reps</li><li>Mobile-friendly field screens</li></ul></div>
+      <div class="cap"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></div><h3>Reports &amp; dashboards</h3><p>Owner, sales and ops dashboards with numbers you can trust, reviewed weekly.</p><ul><li>Close rate by rep, source, trade</li><li>Cost per lead &amp; ad ROI</li><li>Backlog, renewals, revenue forecast</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap model">
+    <div>
+      <p class="kicker">Clean data model</p>
+      <h2>A structure that still works when you have 10,000 jobs.</h2>
+      <p class="lead">Standard objects where Salesforce already does the job, custom objects for the field work. Every record links back to the customer, so sales, ops and service see the same history.</p>
+      <div class="ints" style="margin-top:20px">
+        <span><i></i>Duplicate rules &amp; matching</span><span><i></i>Field history tracking</span><span><i></i>Role-based sharing</span><span><i></i>Sandbox → production releases</span>
+      </div>
+    </div>
+    <div class="erd" aria-label="Example contractor data model">
+      <svg viewBox="0 0 560 330" role="img" aria-label="Lead converts to Account, Contact and Opportunity. Opportunity links to Site Visit, Quote and Job. Job links to Change Order. Account links to Asset and Maintenance Agreement.">
+        <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5E6873"/></marker></defs>
+        <g stroke="#5E6873" stroke-width="1.5" fill="none" marker-end="url(#ar)">
+          <path d="M110 58H178"/><path d="M280 76V118"/><path d="M330 136H398"/><path d="M230 160 150 214"/><path d="M280 160V214"/><path d="M330 150 410 214"/><path d="M335 246 C 400 252 440 262 450 284"/><path d="M230 58 C 60 58 60 280 76 286"/>
+        </g>
+        <g font-size="13" font-weight="600">
+          <g><rect x="12" y="38" width="98" height="40" rx="6" fill="#fff" stroke="#DCD8D0"/><text x="61" y="62" text-anchor="middle" fill="#141B24">Lead</text></g>
+          <g><rect x="178" y="38" width="204" height="40" rx="6" fill="#EAF3FC" stroke="#0B5CAB"/><text x="280" y="62" text-anchor="middle" fill="#0B5CAB">Account · Contact</text></g>
+          <g><rect x="230" y="118" width="100" height="40" rx="6" fill="#EAF3FC" stroke="#0B5CAB"/><text x="280" y="142" text-anchor="middle" fill="#0B5CAB">Opportunity</text></g>
+          <g><rect x="398" y="116" width="150" height="40" rx="6" fill="#EAF3FC" stroke="#0B5CAB"/><text x="473" y="140" text-anchor="middle" fill="#0B5CAB">Quote · Line items</text></g>
+          <g><rect x="90" y="214" width="120" height="40" rx="6" fill="#FCEADF" stroke="#E2571E"/><text x="150" y="238" text-anchor="middle" fill="#B8410F">Site_Visit__c</text></g>
+          <g><rect x="225" y="214" width="110" height="40" rx="6" fill="#FCEADF" stroke="#E2571E"/><text x="280" y="238" text-anchor="middle" fill="#B8410F">Job__c</text></g>
+          <g><rect x="372" y="214" width="180" height="40" rx="6" fill="#FCEADF" stroke="#E2571E"/><text x="462" y="238" text-anchor="middle" fill="#B8410F">Change_Order__c</text></g>
+          <g><rect x="12" y="286" width="250" height="36" rx="6" fill="#FCEADF" stroke="#E2571E"/><text x="137" y="308" text-anchor="middle" fill="#B8410F">Asset · Maintenance_Agreement__c</text></g>
+          <g><rect x="372" y="286" width="180" height="36" rx="6" fill="#fff" stroke="#DCD8D0"/><text x="462" y="308" text-anchor="middle" fill="#141B24">Invoice (via accounting)</text></g>
+        </g>
+        <g font-size="11" fill="#5E6873"><text x="120" y="50">converts</text><text x="288" y="102">1 : many</text></g>
+        <g font-size="11"><rect x="12" y="8" width="12" height="12" rx="2" fill="#EAF3FC" stroke="#0B5CAB"/><text x="30" y="18" fill="#5E6873">Standard object</text><rect x="140" y="8" width="12" height="12" rx="2" fill="#FCEADF" stroke="#E2571E"/><text x="158" y="18" fill="#5E6873">Custom object</text></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="case" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Real project</p>
+    <h2 style="margin-bottom:26px">Case study: a home-improvement contractor in Southern California</h2>
+    <div class="case">
+      <div class="l">
+        <p class="kicker">The challenge</p>
+        <h3>Leads were coming in, but site visits and results lived in texts, calendars and memory.</h3>
+        <p>Reps booked in-home appointments by hand, managers chased visit outcomes, and marketing couldn't see which ads produced sales.</p>
+        <dl><dt>Industry</dt><dd>Home improvement &amp; remodeling</dd><dt>Platform</dt><dd>Salesforce Sales Cloud + Experience Cloud</dd><dt>Scope</dt><dd>Design, build, test, go-live, support</dd><dt>Role</dt><dd>Salesforce admin &amp; automation lead</dd></dl>
+      </div>
+      <div class="r">
+        <h4>What I built</h4>
+        <div class="built">
+          <div><b>01</b><p><strong>Sales Visit automation engine</strong>A custom Site Visit object as the data spine, with Flows that create, assign and update visits and keep Lead and Visit data in sync both ways.</p></div>
+          <div><b>02</b><p><strong>SMS + calendar automation</strong>Dialpad SMS through External Services for confirmations and reminders, calendar events for in-person and second meetings, and Google Calendar sync.</p></div>
+          <div><b>03</b><p><strong>Rep portal &amp; secure feedback forms</strong>An Experience Cloud portal and tokenised guest forms (secure Apex token generator with test class), so reps submit visit results from their phone.</p></div>
+          <div><b>04</b><p><strong>Results to the team, instantly</strong>A flow sends visit results to the team the moment a visit completes, and a scheduled flow back-fills results onto the Lead.</p></div>
+          <div><b>05</b><p><strong>Reporting that replaced a paid tool</strong>A "Leads with Sales Visits" report type plus a Google Sheets + Looker Studio dashboard for ad spend, cost per lead and conversion.</p></div>
+        </div>
+        <div class="res"><span>✓ Manual visit dispatch removed</span><span>✓ Duplicate records fixed at the source</span><span>✓ Ad-to-sale visibility</span><span>✓ Tested before go-live</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dashboard" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Reporting</p>
+    <h2>The dashboard owners actually open.</h2>
+    <p class="lead">One view of where leads come from, how fast your team responds and what's closing. Example below with illustrative numbers.</p>
+    <div class="dash">
+      <div class="kpi"><p class="k">Speed to lead</p><p class="v">4 min</p><p class="d">▼ from 3.5 hrs</p></div>
+      <div class="kpi"><p class="k">Visits booked / week</p><p class="v">46</p><p class="d">▲ 21% vs last month</p></div>
+      <div class="kpi"><p class="k">Close rate</p><p class="v">34%</p><p class="d">▲ 6 pts</p></div>
+      <div class="kpi"><p class="k">Agreements renewed</p><p class="v">91%</p><p class="d">▲ auto-renew flow</p></div>
+    </div>
+    <div class="charts">
+      <div class="chart"><h4>Lead to job funnel</h4><p>Last 90 days</p>
+        <div class="funnel" id="funnel"></div></div>
+      <div class="chart"><h4>Revenue by lead source</h4><p>Closed Won, last 90 days</p>
+        <div class="src" id="src"></div></div>
+    </div>
+    <p class="note">Illustrative figures for a sample HVAC and remodeling company. Your dashboard is built from your own Salesforce data.</p>
+  </div>
+</section>
+
+<section id="process" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">How we work</p>
+    <h2>A clear plan, fixed milestones, no surprises.</h2>
+    <div class="steps">
+      <div class="step"><span class="w">Week 1</span><h3>Discover</h3><p>Map your sales and job process, tools and reports. Find the leaks.</p></div>
+      <div class="step"><span class="w">Week 1–2</span><h3>Design</h3><p>Data model, pipeline, automations and dashboards agreed in writing.</p></div>
+      <div class="step"><span class="w">Week 2–5</span><h3>Build</h3><p>Configured in a sandbox with weekly demos so you see progress.</p></div>
+      <div class="step"><span class="w">Week 5–6</span><h3>Test &amp; migrate</h3><p>Real scenarios tested, data cleaned and imported without duplicates.</p></div>
+      <div class="step"><span class="w">Week 6</span><h3>Launch &amp; train</h3><p>Go-live, short role-based training and simple how-to guides.</p></div>
+      <div class="step"><span class="w">Ongoing</span><h3>Support</h3><p>Admin, enhancements and a weekly report on adoption and results.</p></div>
+    </div>
+    <p class="note">Typical timeline for a full implementation. Smaller fixes and add-ons often take days, not weeks.</p>
+  </div>
+</section>
+
+<section id="packages" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Ways to work together</p>
+    <h2>Start where you are.</h2>
+    <div class="packs">
+      <div class="pack"><h3>CRM Health Check</h3><p class="for">Already on Salesforce, but it's messy or underused.</p><ul><li>Org audit: data, automations, security</li><li>Duplicate and data-quality review</li><li>Prioritised fix list with effort</li><li>Quick wins delivered</li></ul><p class="time">1–2 weeks</p></div>
+      <div class="pack hl"><h3>Contractor CRM Build</h3><p class="for">New to Salesforce, or rebuilding properly.</p><ul><li>Trade-specific pipeline &amp; objects</li><li>Lead routing, visits, SMS &amp; calendar</li><li>Quotes, jobs and handoff automation</li><li>Dashboards, training and go-live</li></ul><p class="time">4–8 weeks</p></div>
+      <div class="pack"><h3>Managed Admin</h3><p class="for">You want a Salesforce expert on call.</p><ul><li>Monthly hours for changes &amp; fixes</li><li>New reports, flows and fields</li><li>User support and onboarding</li><li>Weekly adoption &amp; results report</li></ul><p class="time">Monthly</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Integrations</p>
+    <h2>Connected to the tools you already use.</h2>
+    <div class="ints">
+      <span><i></i>Google &amp; Meta Ads</span><span><i></i>Dialpad / RingCentral SMS</span><span><i></i>Google &amp; Outlook Calendar</span><span><i></i>Gmail &amp; Outlook (Einstein Activity Capture)</span><span><i></i>QuickBooks / Xero</span><span><i></i>DocuSign</span><span><i></i>Zapier</span><span><i></i>Looker Studio</span><span><i></i>AI voice agents for call-backs</span><span><i></i>Marketing Cloud / HubSpot email</span>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Questions</p>
+    <h2>Before you ask</h2>
+    <div class="faq">
+      <details><summary>We already have Salesforce. Can you work with what we have?</summary><p>Yes. Most projects start with an existing org. I audit what's there, keep what works, and fix or rebuild what doesn't, without disrupting your team.</p></details>
+      <details><summary>Do we need Field Service licences?</summary><p>Not always. Many contractors run visits, jobs and agreements well on Sales Cloud with custom objects and Flows. If dispatching crews at scale needs Field Service, I'll tell you up front.</p></details>
+      <details><summary>Will our team actually use it?</summary><p>Adoption is designed in: simple page layouts, mobile-friendly actions, fewer clicks and short training by role. Weekly reports show who is using it and where.</p></details>
+      <details><summary>Can you move our data from spreadsheets or another CRM?</summary><p>Yes. Data is cleaned, de-duplicated and mapped before import, and tested in a sandbox first.</p></details>
+      <details><summary>Where are you based and what hours do you work?</summary><p>Process IQ Automation works with contractors in the US, Canada, the UK and Europe, with overlap on your business hours for calls and go-lives.</p></details>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="cta">
+      <div><h2>Get a free 20-minute CRM review for your business.</h2><p>Bring your current process or Salesforce org. You'll leave with three concrete improvements, whether we work together or not.</p></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-w" href="https://processiqautomation.com/contact" target="_blank" rel="noopener">Book my review →</a><a class="btn btn-g" href="mailto:info@processiqautomation.com?subject=Salesforce%20for%20my%20contracting%20business">Email me</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span><b style="color:var(--ink)">Vinay Kumar Gaur</b> · Process IQ Automation · <a href="https://processiqautomation.com" target="_blank" rel="noopener">processiqautomation.com</a></span><span>Example screens and dashboard figures are illustrative. Case-study client kept anonymous.</span></div>
+</footer>
+
+<script>
+(function(){
+const I={
+ bolt:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>',
+ hard:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 18h18M5 18a7 7 0 0 1 14 0M12 5v4M9 6l1 4M15 6l-1 4"/></svg>',
+ fan:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M12 10c0-4 1-7 4-7s3 5-2 7M14 12c4 0 7 1 7 4s-5 3-7-2M12 14c0 4-1 7-4 7s-3-5 2-7M10 12c-4 0-7-1-7-4s5-3 7 2"/></svg>',
+ roof:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12 12 4l9 8M6 10v10h12V10"/></svg>',
+ plug:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 2v6M15 2v6M7 8h10v4a5 5 0 0 1-10 0zM12 17v5"/></svg>',
+ check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>'
+};
+const T=[
+ {k:"gc",n:"General contractor",ic:"hard",
+  d:"Longer, higher-value projects with bids, subcontractors and change orders. The CRM has to track the bid, then hand a clean job to operations.",
+  stages:[["Lead received","Web, referral, architect or bid board"],["Site walk","Scope, photos and measurements on the Site Visit record"],["Estimate / bid","Line items, alternates, subcontractor pricing"],["Contract","E-signature, deposit, permits checklist"],["Job in progress","Milestones, change orders, draw schedule"],["Closeout","Punch list, warranty, review &amp; referral ask"]],
+  objs:["Site Visit","Bid / Quote","Job","Change Order","Subcontractor","Permit","Draw schedule","Warranty"],
+  autos:["Bid due-date reminders and win/loss reasons captured","Closed Won creates the Job, permit checklist and kickoff tasks","Change orders need approval before they change the contract value","Homeowner portal shows milestones and photos"],
+  mk:{name:"Patel Residence · Kitchen & Addition",stage:3,fields:[["Project type","Addition + kitchen"],["Contract value","$148,500"],["Site walk","Oct 14, 9:30 AM"],["Bid due","Oct 21"],["Permit","Submitted"],["Owner","D. Morales"]],acts:[["#E2571E","Site walk completed","Photos & scope uploaded by rep"],["#0B5CAB","Bid v2 sent","Alternates: quartz, windows"],["#2E7D4F","Task created","Confirm structural engineer"]],toast:"Flow: bid reminder scheduled 48 hrs before due date"}},
+ {k:"hvac",n:"HVAC",ic:"fan",
+  d:"High-volume calls, fast quotes for replacements and a big opportunity in maintenance agreements. Speed to lead and renewals drive revenue.",
+  stages:[["New request","Call, web form or ad lead"],["Diagnostic visit","Booked with SMS confirmation and tech notes"],["Options presented","Good / better / best with financing"],["Sold","Install scheduled, equipment ordered"],["Installed","Equipment &amp; warranty registered as Assets"],["Maintenance plan","Auto-renewing agreement and seasonal tune-ups"]],
+  objs:["Site Visit","Asset (equipment)","Warranty","Maintenance Agreement","Service history","Financing application"],
+  autos:["New lead texted and assigned in under 5 minutes","Good / better / best quote options from the Opportunity","Installed equipment logged as Assets with warranty dates","Spring and fall tune-up reminders; renewals 30 days before expiry"],
+  mk:{name:"Ramos Residence · HVAC Replacement",stage:2,fields:[["System","3-ton heat pump"],["Option chosen","Better · $11,850"],["Diagnostic","Oct 15, 2:00 PM"],["Equipment age","17 yrs"],["Financing","Pre-approved"],["Tech","J. Nguyen"]],acts:[["#E2571E","Diagnostic visit completed","Compressor failure, R-22 system"],["#0B5CAB","Quote sent: 3 options","Opened 2x by customer"],["#2E7D4F","Agreement offered","Comfort Club, $19/mo"]],toast:"Flow: SMS confirmation sent to customer and tech"}},
+ {k:"roof",n:"Roofing & remodeling",ic:"roof",
+  d:"In-home sales appointments, insurance claims and financing. The win is booking more visits, tracking every result and following up until a decision.",
+  stages:[["Lead received","Ads, door knocking, storm canvassing"],["Appointment set","Rep and homeowner calendar + SMS reminders"],["In-home visit","Results submitted from the rep portal"],["Proposal","Options, financing, insurance details"],["Signed","Production scheduled, materials ordered"],["Complete","Final inspection, review and referral request"]],
+  objs:["Sales Visit","Insurance claim","Inspection","Job","Material order","Referral"],
+  autos:["Appointment reminders and no-show rescheduling by SMS","Reps submit visit results from a mobile portal form","Second-meeting events created automatically","Results sent to the sales team the moment a visit completes"],
+  mk:{name:"Chen Residence · Roof & Gutters",stage:2,fields:[["Roof type","Asphalt shingle"],["Squares","28"],["Visit result","Needs 2nd meeting"],["Insurance","Claim #48-1192"],["Proposal","$21,400"],["Rep","A. Brooks"]],acts:[["#E2571E","Visit result submitted","Via rep portal, 6:42 PM"],["#0B5CAB","2nd meeting booked","Oct 18, 5:30 PM, both spouses"],["#2E7D4F","Results sent to team","Manager notified"]],toast:"Flow: 2nd meeting added to rep and Google calendars"}},
+ {k:"elec",n:"Electrical & plumbing",ic:"plug",
+  d:"Mix of service calls and project work. Quick dispatch, clear job history per property and repeat business from service plans.",
+  stages:[["Service request","Emergency or scheduled"],["Dispatched","Tech assigned by skill and area"],["On site","Estimate or fix with photos"],["Quote / approve","Approved on the spot or followed up"],["Completed","Invoice synced to accounting"],["Service plan","Annual inspection and member pricing"]],
+  objs:["Service request","Property","Site Visit","Job","Service plan","Invoice sync"],
+  autos:["Emergency requests flagged and routed first","Job history visible per property, not just per customer","Unapproved quotes followed up after 2 and 7 days","Completed jobs synced to QuickBooks or Xero"],
+  mk:{name:"Okafor Property · Panel Upgrade",stage:3,fields:[["Job type","200A panel upgrade"],["Quote","$4,960"],["Visit","Oct 16, 8:00 AM"],["Permit","Required"],["Plan member","Yes"],["Tech","R. Silva"]],acts:[["#E2571E","Estimate approved on site","Signed on tablet"],["#0B5CAB","Permit task created","Due in 3 days"],["#2E7D4F","Invoice queued","Sync to QuickBooks"]],toast:"Flow: job created and permit task assigned"}}
+];
+const $=id=>document.getElementById(id);
+let cur=1;
+function mock(t){
+  const m=t.mk,st=["New","Visit","Quote","Negotiation","Closed Won"];
+  $("mkName").textContent=m.name;
+  $("mkPath").innerHTML=st.map((s,i)=>`<span class="${i<m.stage?"done":i===m.stage?"cur":""}">${s}</span>`).join("");
+  $("mkFields").innerHTML=m.fields.map(f=>`<div>${f[0]}<b>${f[1]}</b></div>`).join("");
+  $("mkAct").innerHTML=m.acts.map(a=>`<div class="act"><i style="background:${a[0]}">●</i><div>${a[1]}<small>${a[2]}</small></div></div>`).join("");
+  $("mkToast").lastElementChild.textContent=m.toast;
+  [$("mkFields"),$("mkAct"),$("mkToast")].forEach(e=>{e.classList.remove("fade");void e.offsetWidth;e.classList.add("fade");});
+}
+function render(){
+  const t=T[cur];
+  $("switch").innerHTML=T.map((x,i)=>`<button type="button" aria-pressed="${i===cur}" data-i="${i}">${I[x.ic]}${x.n}</button>`).join("");
+  $("switch").querySelectorAll("button").forEach(b=>b.onclick=()=>{cur=+b.dataset.i;render();});
+  $("tradebox").innerHTML=`<div class="panel fade"><h3>${t.n} pipeline</h3><p class="d">${t.d}</p><div class="pipe">${t.stages.map((s,i)=>`<div class="st"><b>${String(i+1).padStart(2,"0")}</b><div>${s[0]}<small>${s[1]}</small></div></div>`).join("")}</div></div>
+  <div class="panel fade"><h3>Custom records</h3><p class="d">Objects added on top of standard Leads, Accounts and Opportunities.</p><div class="chips">${t.objs.map(o=>`<span>${o}</span>`).join("")}</div>
+  <p class="sub2">Key automations</p><ul class="autos">${t.autos.map(a=>`<li>${I.check}<span>${a}</span></li>`).join("")}</ul></div>`;
+  mock(t);
+}
+render();
+/* hero mock cycles through trades until the user interacts */
+let auto=setInterval(()=>{if(document.hidden)return;cur=(cur+1)%T.length;mock(T[cur]);},5200);
+$("switch").addEventListener("click",()=>clearInterval(auto),{once:true});
+
+/* dashboard */
+const F=[["Leads",612],["Contacted < 5 min",571],["Visits booked",318],["Proposals sent",241],["Jobs won",108]];
+const S=[["Google Ads",412000],["Referrals",286000],["Meta Ads",171000],["Repeat customers",149000],["Website organic",96000]];
+const usd=v=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0}).format(v);
+$("funnel").innerHTML=F.map(f=>`<div class="row"><span>${f[0]}</span><div class="bar"><i style="width:0" data-w="${f[1]/F[0][1]*100}"></i></div><span class="n">${f[1]}</span></div>`).join("");
+$("src").innerHTML=S.map(s=>`<div class="row"><span>${s[0]}</span><b>${usd(s[1])}</b><div class="bar"><i style="width:${s[1]/S[0][1]*100}%"></i></div></div>`).join("");
+const fire=()=>document.querySelectorAll("#funnel i").forEach(i=>i.style.width=i.dataset.w+"%");
+if("IntersectionObserver" in window){const io=new IntersectionObserver(e=>{if(e.some(x=>x.isIntersecting)){fire();io.disconnect();}},{threshold:.3});io.observe($("funnel"));}else fire();
+})();
+</script>
+</body>
+</html>
