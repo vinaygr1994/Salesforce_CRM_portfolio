@@ -1,0 +1,68 @@
+/* live demo pill in header */
+.live{display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;border-radius:999px;background:var(--orange-soft);color:var(--orange-ink)!important;font-weight:700;box-shadow:inset 0 0 0 1px #9ED3DA;text-decoration:none;white-space:nowrap;animation:liveglow 2.4s ease-in-out infinite}
+.live:hover{background:#D5EEF2}
+.live i{position:relative;width:8px;height:8px;border-radius:50%;background:#E5484D;display:block;flex:none}
+.live i::after{content:"";position:absolute;inset:0;border-radius:50%;background:#E5484D;animation:ping 1.6s cubic-bezier(0,0,.2,1) infinite}
+@keyframes ping{0%{transform:scale(1);opacity:.75}80%,100%{transform:scale(2.8);opacity:0}}
+@keyframes liveglow{0%,100%{box-shadow:inset 0 0 0 1px #9ED3DA,0 0 0 0 rgba(10,124,140,0)}50%{box-shadow:inset 0 0 0 1px #9ED3DA,0 0 0 5px rgba(10,124,140,.14)}}
+.live-m{display:none;font-size:13px}
+.nav .r{display:flex;align-items:center;gap:10px}
+@media (max-width:900px){.live-m{display:inline-flex}}
+@media (max-width:420px){.live-m{padding:6px 10px 6px 9px;font-size:12.5px}.nav .r .btn{padding:8px 11px;font-size:13px}.brand img{height:34px!important}}
+
+/* hands-on banner + your-turn prompts */
+.dm-try{display:flex;align-items:center;gap:14px;padding:14px 22px;background:linear-gradient(90deg,var(--ink),var(--ink2));color:#fff}
+.dm-try .ic{width:38px;height:38px;border-radius:10px;background:rgba(18,168,188,.18);color:var(--teal-lt);display:grid;place-items:center;flex:none}
+.dm-try .ic svg{width:20px;height:20px}
+.dm-try b{display:block;font-size:15px}
+.dm-try span{display:block;font-size:13.5px;color:#B9C6D3}
+.dm-try .tags{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.dm-try .tags em{font-style:normal;font-size:12px;font-weight:600;border:1px solid #3A5168;color:#DCE5EE;border-radius:999px;padding:4px 10px;white-space:nowrap}
+@media (max-width:860px){.dm-try{padding:12px 16px;flex-wrap:wrap}.dm-try .tags{margin-left:0;justify-content:flex-start}}
+.yt{display:flex;align-items:flex-start;gap:10px;background:#fff;border:1.5px solid var(--orange);border-radius:10px;padding:10px 14px;font-size:14px;color:var(--ink2);box-shadow:0 8px 20px -14px rgba(10,124,140,.6)}
+.yt b{color:var(--orange-ink);white-space:nowrap}
+.yt .dot{position:relative;width:10px;height:10px;border-radius:50%;background:var(--orange);flex:none;margin-top:5px}
+.yt .dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--orange);animation:ping 1.6s cubic-bezier(0,0,.2,1) infinite}
+.yt.tip{border-style:dashed;border-color:#9ED3DA;box-shadow:none}
+.yt.tip .dot{background:#9ED3DA}.yt.tip .dot::after{display:none}
+.glow{animation:btnglow 2s ease-in-out infinite}
+@keyframes btnglow{0%,100%{box-shadow:0 0 0 0 rgba(10,124,140,.45)}50%{box-shadow:0 0 0 7px rgba(10,124,140,0)}}
+.dm .fx input:not(:disabled),.dm .fx select:not(:disabled){background:#FFFEF7}
+
+/* homeowner email */
+.cem-bg{background:#EDF0F3;border-radius:8px;padding:18px 12px}
+@media (max-width:480px){.cem-bg{padding:10px 6px}}
+.cem{max-width:560px;margin:0 auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 10px rgba(13,27,42,.08);font-size:14.5px;line-height:1.55;color:#22303E}
+.cem-top{background:#14283A;padding:18px 26px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.cem-logo{display:flex;align-items:center;gap:10px;color:#fff}
+.cem-logo svg{width:34px;height:34px;flex:none}
+.cem-logo b{display:block;font-family:Georgia,serif;font-size:17px;letter-spacing:.06em}
+.cem-logo small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#9FB4C7}
+.cem-top .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#E8B04B;font-weight:700;white-space:nowrap}
+.cem-hero{padding:26px 26px 8px}
+.cem-hero .ey{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#B0832C;font-weight:700;margin:0 0 6px}
+.cem-hero h4{font-family:Georgia,serif;font-size:26px;line-height:1.2;margin:0 0 10px;color:#14283A;font-weight:700}
+.cem-hero p{margin:0 0 10px}
+.cem-sum{margin:10px 26px 4px;border:1px solid #E3E8ED;border-radius:8px;overflow:hidden}
+.cem-sum div{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:10px;padding:9px 14px;border-top:1px solid #EEF1F4;font-size:13.5px}
+.cem-sum div:first-child{border-top:0;background:#F7F9FA;font-weight:700;color:#14283A;grid-template-columns:1fr}
+.cem-sum span{color:#6A7886}
+.cem-sum b{font-weight:600;color:#14283A;text-align:right}
+.cem-h5{font-family:Georgia,serif;font-size:17px;color:#14283A;margin:18px 26px 8px}
+.cem-tl{margin:0 26px;padding:0;list-style:none;display:grid;gap:0}
+.cem-tl li{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:9px 0;border-top:1px solid #EEF1F4}
+.cem-tl li:first-child{border-top:0}
+.cem-tl i{width:28px;height:28px;border-radius:50%;background:#FBF3E2;color:#B0832C;font-style:normal;font-weight:700;font-size:12.5px;display:grid;place-items:center}
+.cem-tl b{display:block;font-size:14px;color:#14283A}
+.cem-tl small{display:block;color:#6A7886;font-size:13px}
+.cem-pc{margin:16px 26px 0;display:flex;gap:12px;align-items:center;background:#F7F9FA;border-radius:8px;padding:12px 14px}
+.cem-pc .av{width:44px;height:44px;border-radius:50%;background:#14283A;color:#E8B04B;display:grid;place-items:center;font-weight:700;flex:none;font-family:Georgia,serif}
+.cem-pc b{display:block;color:#14283A}
+.cem-pc small{display:block;color:#6A7886;font-size:12.5px}
+.cem-cta{text-align:center;padding:20px 26px 6px}
+.cem-cta span{display:inline-block;background:#B0832C;color:#fff;font-weight:700;padding:12px 26px;border-radius:6px;font-size:14.5px}
+.cem-sign{padding:14px 26px 22px}
+.cem-sign p{margin:0}
+.cem-ft{background:#F4F6F8;padding:16px 26px;font-size:12px;color:#7A8794;text-align:center;line-height:1.6}
+.cem-note{font-size:12px;color:var(--muted);text-align:center;margin:8px 0 0}
+@media (max-width:480px){.cem-top,.cem-hero,.cem-sign,.cem-ft{padding-left:16px;padding-right:16px}.cem-sum,.cem-tl,.cem-pc,.cem-h5{margin-left:16px;margin-right:16px}.cem-hero h4{font-size:22px}.cem-top{flex-wrap:wrap}}
