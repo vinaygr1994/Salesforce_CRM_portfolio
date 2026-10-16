@@ -1,0 +1,28 @@
+<section id="demo">
+  <div class="wrap">
+    <p class="kicker">Interactive demo · try it</p>
+    <h2>Follow one lead from web form to the manager's phone.</h2>
+    <p class="lead">This is a working walkthrough of a contractor sales process I build in Salesforce. Submit a lead, watch it get routed, book the in-home visit, fill the rep's on-site form, and see what the manager receives. Choose different answers to see different outcomes.</p>
+    <div class="dm" id="dm">
+      <ol class="dm-steps" id="dmSteps" aria-label="Demo steps"></ol>
+      <div class="dm-body">
+        <div class="dm-side" aria-live="polite">
+          <p class="dm-k" id="dmK"></p>
+          <h3 id="dmTitle"></h3>
+          <p id="dmText"></p>
+          <div class="dm-chips" id="dmChips"></div>
+        </div>
+        <div class="dm-stage" id="dmStage"></div>
+        <div class="dm-logw">
+          <div class="dm-logh"><i aria-hidden="true"></i>Salesforce activity log</div>
+          <ul class="dm-log" id="dmLog" aria-live="polite"></ul>
+        </div>
+      </div>
+      <div class="dm-nav">
+        <button type="button" class="dbtn sec" id="dmBack">← Back</button>
+        <span class="hint" id="dmHint"></span>
+        <button type="button" class="dbtn" id="dmNext">Next →</button>
+      </div>
+    </div>
+  </div>
+</section>
