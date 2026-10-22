@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Your Quick Fix | Process IQ Automation</title>
+<meta name="robots" content="noindex"/>
+<link rel="icon" type="image/png" sizes="32x32" href="https://processiqautomation.com/favicon-32.png"/>
+<link rel="stylesheet" href="_shared.css"/>
+<style>
+.gauge{display:flex;gap:6px;margin:0 0 18px}
+.gauge i{flex:1;height:8px;border-radius:4px;background:#E7E0D3}
+.gauge i.on{background:var(--clay)}
+.gauge.good i.on{background:#4A7C59}
+.gauge.mid i.on{background:#B8863F}
+.score{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px}
+.score b{font:400 26px/1.2 Georgia,serif;color:var(--green)}
+.score span{font:700 11px/1 Arial,sans-serif;letter-spacing:1.6px;color:var(--muted);white-space:nowrap}
+ol.fix{list-style:none;margin:16px 0 0;padding:0;counter-reset:f}
+ol.fix li{counter-increment:f;display:grid;grid-template-columns:34px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+ol.fix li::before{content:counter(f);width:28px;height:28px;border-radius:50%;background:var(--sage);color:var(--green);font:700 13px/28px Arial,sans-serif;text-align:center}
+ol.fix b{display:block}
+ol.fix span{color:var(--muted);font-size:14.5px}
+.tpl{margin-top:20px;background:var(--sage);border-radius:12px;padding:18px}
+.tpl p.k{font:700 11px/16px Arial,sans-serif;letter-spacing:1.8px;color:var(--green);margin:0 0 8px}
+.tpl blockquote{margin:0 0 14px;background:#fff;border-radius:14px 14px 14px 4px;padding:14px 16px;font-size:15.5px;line-height:1.5}
+.tpl button{all:unset;cursor:pointer;background:var(--green);color:#fff;font-weight:700;font-size:14px;padding:10px 16px;border-radius:6px}
+.fields{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.fields span{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:13.5px;font-weight:600}
+.fields span i{font-style:normal;color:var(--clay)}
+</style></head>
+<body><main>
+<a class="brand" href="https://www.processiqautomation.com/"><span>PROCESS IQ <small>AUTOMATION</small></span></a>
+<p class="eyebrow" id="ey"></p>
+<h1 id="h"></h1>
+<p class="lede" id="lede"></p>
+<section class="card" aria-live="polite">
+<div class="score" id="scoreRow"><b id="tier"></b><span id="metric"></span></div>
+<div class="gauge" id="gauge"><i></i><i></i><i></i><i></i><i></i></div>
+<p id="body" style="margin:0"></p>
+<ol class="fix" id="fix"></ol>
+<div class="fields" id="fields"></div>
+<div class="tpl" id="tpl" hidden><p class="k">COPY THIS FOLLOW-UP TEXT</p><blockquote id="tplText"></blockquote><button type="button" id="copy">Copy text</button></div>
+</section>
+<section class="dark">
+<h2 id="ctaH"></h2>
+<p id="ctaP"></p>
+<div class="row"><a class="btn lt" id="demo" href="/#demo"></a><a class="ghost" href="https://www.processiqautomation.com/contact">Book a 15-min call</a></div>
+</section>
+<div class="picker"><p>Not quite right? Pick another answer:</p><div id="pick"></div></div>
+<p class="foot">Vinay Kumar Gaur · Process IQ Automation · <a href="/">See the full Salesforce build for contractors</a></p>
+</main>
+<script>
+const G={
+ quotes:{ey:"QUIET ESTIMATES",metric:"FOLLOW-UP",cta:["Watch the follow-up run.","Submit a test lead in the live demo and follow it to a signed job.","Try the live demo →","#demo"],
+  pick:[["q_few","1–5 a month"],["q_mid","6–15 a month"],["q_many","16+ a month"]]},
+ obj:{ey:"YOUR FOLLOW-UP REPLY",metric:"OBJECTION",cta:["Send it automatically, on day 2.","The right text goes out from your rep's number, and the rep is alerted when the estimate is reopened.","See the follow-up flow →","#demo"],
+  pick:[["o_price","“More than we expected”"],["o_think","“Need to think about it”"],["o_compare","“Getting other quotes”"]]},
+ visits:{ey:"VISIT RESULTS",metric:"VISIT DATA",cta:["Fill the rep form yourself.","Step 4 of the live demo: check in, add photos, pick an outcome and submit.","Open the rep form →","#demo"],
+  pick:[["v_texts","Texts and calls"],["v_paper","Paper or notes"],["v_crm","The CRM"]]},
+ forms:{ey:"REP FORM BY TRADE",metric:"FIELDS",cta:["Try it on your phone.","The live demo has the same form, with a switch for roofing, HVAC and remodeling.","Open the rep form →","#demo"],
+  pick:[["f_roof","Roofing"],["f_kitchen","Kitchen"],["f_bath","Bathroom"]]},
+ reviews:{ey:"GOOGLE REVIEWS",metric:"REVIEWS",cta:["See where reviews fit in the journey.","From first lead to repeat client, every step connected in one system.","See the full journey →","#lifecycle"],
+  pick:[["r_low","Under 25"],["r_mid","25–100"],["r_high","100+"]]},
+ after:{ey:"AFTER THE FINAL PAYMENT",metric:"FOLLOW-UP",cta:["See where this fits in the journey.","From first lead to repeat client, every step connected in one system.","See the full journey →","#lifecycle"],
+  pick:[["a_nothing","Thanks and move on"],["a_sometimes","When we remember"],["a_system","We have a plan"]]},
+ ads:{ey:"YOUR LEAD SOURCE",metric:"TRACKING",cta:["See the sample dashboard.","Lead to job funnel and revenue by source, with illustrative numbers.","See the dashboard →","#dashboard"],
+  pick:[["s_google","Google"],["s_meta","Meta"],["s_angi","Angi / Yelp"]]}
+};
+const R={
+ q_few:{g:"quotes",h:'A few quiet estimates still add up.',lede:'Even 3 a month at $30K each is $90K sitting in someone else\'s inbox.',tier:'Manageable',n:4,c:"good",body:'Keep every one of them warm with three timed touches:',
+  fix:[['Day 2: a friendly check-in text','From the rep\'s number, with the estimate link.'],['Reopened? Alert the rep','A task the moment the homeowner looks again.'],['Day 7: one useful extra','Financing options or a similar finished job.']]},
+ q_mid:{g:"quotes",h:'That\'s a quiet estimate <em>every week.</em>',lede:'Most aren\'t a no. They\'re a busy homeowner waiting for a nudge.',tier:'Leaking',n:2,c:"mid",body:'Three changes that bring them back without more calls:',
+  fix:[['Automatic day-2 and day-5 texts','Personal, short, and stopped the moment they reply.'],['Open tracking on every estimate','Your rep calls when interest is highest, not at random.'],['E-sign and deposit in one tap','No printing, scanning or "I\'ll get to it".']]},
+ q_many:{g:"quotes",h:'16+ quiet estimates is your <em>biggest upside.</em>',lede:'You already paid for these leads and the visit. Following up is the cheapest revenue you have.',tier:'Big upside',n:1,c:"",body:'Start here, in this order:',
+  fix:[['One list of every open estimate','Value, age and last activity, sorted for the rep.'],['A 3-touch follow-up on autopilot','Day 2 text, day 5 email, day 9 final check-in.'],['Weekly "aging estimates" report','Every Monday, so nothing quietly expires.']]},
+ o_price:{g:"obj",h:'"It\'s more than we <em>expected.</em>"',lede:'Price objections usually mean "help me see the value" or "help me afford it."',tier:'Price',n:0,c:"",body:'What to send on day 2:',
+  tpl:'Hi {first}, thanks again for having us out. I know the number was more than you planned. Two options if it helps: we can phase the work, or I can send monthly payment options. Want either?',
+  fix:[['Offer phasing or options','A smaller first phase keeps the project alive.'],['Show monthly payments','Financing reframes $38K as a monthly number.'],['Send a similar finished job','Photos of a comparable project build confidence.']]},
+ o_think:{g:"obj",h:'"We need to <em>think about it.</em>"',lede:'Usually means one decision-maker wasn\'t there, or a question went unasked.',tier:'Timing',n:0,c:"",body:'What to send on day 2:',
+  tpl:'Hi {first}, no rush at all. Most couples have a question or two after a visit. Is there anything I can answer, or would a quick call with both of you this week help?',
+  fix:[['Invite the other decision-maker','A short call when both can join.'],['Answer the unasked question','Timeline, mess, permits: send the FAQ.'],['Set a gentle date','"I can hold this price until the 30th."']]},
+ o_compare:{g:"obj",h:'"We\'re getting <em>other quotes.</em>"',lede:'Good. Make yours the easiest one to compare, and the one that follows up.',tier:'Comparing',n:0,c:"",body:'What to send on day 2:',
+  tpl:'Hi {first}, smart to compare. When you line the quotes up, check what\'s included: permits, haul-away, warranty and timeline. Happy to walk through ours line by line, takes 10 minutes.',
+  fix:[['Send a "how to compare" checklist','You set the criteria the others are judged on.'],['Highlight warranty and timeline','The things cheaper bids usually leave out.'],['Follow up on day 5','Most competitors never follow up at all.']]},
+ v_texts:{g:"visits",h:'Results in texts means <em>follow-ups slip.</em>',lede:'Nobody can report on a text thread, and nothing happens automatically after it.',tier:'Scattered',n:1,c:"",body:'Move the result into the CRM, without extra work for reps:',
+  fix:[['A 2-minute phone form','Check-in, photos, price and outcome, on site.'],['Outcome triggers the next step','Sold creates the job; 2nd meeting books it; not sold starts follow-up.'],['Manager summary, instantly','Slack, email or SMS the moment it\'s submitted.']]},
+ v_paper:{g:"visits",h:'Notes work until <em>someone\'s on vacation.</em>',lede:'Paper and notes apps keep the detail, but nobody else can see it or act on it.',tier:'Slow',n:2,c:"mid",body:'Keep the detail, add the automation:',
+  fix:[['Same questions, on a phone form','Your reps fill what they already write down.'],['Photos saved to the job','Not on the rep\'s camera roll.'],['Results feed your dashboard','Close rate by rep and lead source, automatically.']]},
+ v_crm:{g:"visits",h:'In the CRM is right. <em>Now make it effortless.</em>',lede:'If reps update it "most of the time", the gaps are where jobs slip.',tier:'Ahead',n:4,c:"good",body:'Close the last gaps:',
+  fix:[['Mobile form instead of desktop fields','Filled in the driveway, not at 10 PM.'],['Required fields by outcome','Sold needs a deposit; not sold needs a reason.'],['Alerts for overdue results','If a visit has no result in 2 hours, the manager knows.']]},
+ f_roof:{g:"forms",h:'The <em>roofing</em> visit form.',lede:'What your rep fills on site, in about two minutes, and what each answer triggers.',tier:'9 fields',n:0,c:"",body:'Fields on the form:',
+  fields:['Check-in + GPS','Decision makers present*','Roof type','Squares','Layers to remove','Insurance claim? → claim #','Photos','Price + discount','Outcome*'],
+  fix:[['Sold','Job created, deposit invoice, materials task.'],['2nd meeting','Event booked for rep and homeowner, reminders set.'],['Not sold','Reason saved, 90-day follow-up starts.']]},
+ f_kitchen:{g:"forms",h:'The <em>kitchen</em> visit form.',lede:'What your rep fills on site, in about two minutes, and what each answer triggers.',tier:'11 fields',n:0,c:"",body:'Fields on the form:',
+  fields:['Check-in + GPS','Decision makers present*','Layout change?','Square feet','Cabinet line','Countertop','Budget range','Photos','Price + discount','Financing interest','Outcome*'],
+  fix:[['Sold','Job created, design meeting booked, deposit invoice.'],['2nd meeting','Showroom visit booked, samples list sent.'],['Not sold','Reason saved, financing email if budget was the issue.']]},
+ f_bath:{g:"forms",h:'The <em>bathroom</em> visit form.',lede:'What your rep fills on site, in about two minutes, and what each answer triggers.',tier:'10 fields',n:0,c:"",body:'Fields on the form:',
+  fields:['Check-in + GPS','Decision makers present*','Tub to shower?','Tile area','Vanity size','Accessibility needs','Photos','Price + discount','Timeline','Outcome*'],
+  fix:[['Sold','Job created, tile selection booked, deposit invoice.'],['2nd meeting','Event booked, both decision-makers invited.'],['Not sold','Reason saved, check-in in 60 days.']]},
+ r_low:{g:"reviews",h:'Under 25 reviews is the <em>fastest win.</em>',lede:'Homeowners compare remodelers on Google first. Every finished job should become a review.',tier:'Behind',n:1,c:"",body:'Start the habit automatically:',
+  fix:[['Ask on day 3 after completion','When they\'re happiest, by text, from the owner.'],['One tap to your Google page','No searching, no login hunt.'],['Gentle reminder on day 7','Only if they haven\'t posted yet.']]},
+ r_mid:{g:"reviews",h:'25–100 reviews: <em>keep them coming.</em>',lede:'Recent reviews matter as much as the total. A steady flow beats a big old pile.',tier:'Growing',n:3,c:"mid",body:'Make it steady:',
+  fix:[['Every completed job asks','Not just the ones someone remembers.'],['Unhappy? Route to the owner first','A private feedback step before Google.'],['Reply to every review','A reminder task the day it\'s posted.']]},
+ r_high:{g:"reviews",h:'100+ reviews. <em>Now turn them into referrals.</em>',lede:'Your happiest reviewers are your best salespeople. Ask them for introductions.',tier:'Strong',n:5,c:"good",body:'Next level:',
+  fix:[['Day 30 referral ask','To 5-star reviewers, with a simple share link.'],['Track referral source','See which past clients send work.'],['Thank-you for referrers','Automatic when a referral signs.']]},
+ a_nothing:{g:"after",h:'Thanks and move on <em>leaves jobs behind.</em>',lede:'Past clients already trust you. Most remodelers never ask them for anything again.',tier:'Most common',n:1,c:"",body:'Add these three touches:',
+  fix:[['Day 1: thank-you with photos','Before-and-after shots and the warranty.'],['Day 3: review request','One tap to Google.'],['Day 30: referral ask','"Know anyone planning a project?"']]},
+ a_sometimes:{g:"after",h:'"When we remember" means <em>most don\'t get asked.</em>',lede:'The busiest months, when you finish the most jobs, are when nobody remembers.',tier:'Sometimes',n:3,c:"mid",body:'Make it automatic:',
+  fix:[['Trigger on job completion','The sequence starts when the job is marked done.'],['Same timing every time','Day 1, 3 and 30, from the owner.'],['Yearly check-in','Maintenance tips and the next-project question.']]},
+ a_system:{g:"after",h:'A plan puts you <em>ahead of most.</em>',lede:'Now measure it, so you know which touches bring work back.',tier:'Rare',n:4,c:"good",body:'Measure and grow it:',
+  fix:[['Referral source on every lead','See which past clients send work.'],['Review rate by crew and rep','Spot your best finishers.'],['Repeat-project prompts','Kitchen clients often do the bath next.']]},
+ s_google:{g:"ads",h:'Google brings volume. <em>Does it bring jobs?</em>',lede:'Clicks and calls are easy to count. Signed jobs per campaign is the number that matters.',tier:'Most used',n:0,c:"",body:'Track these, per campaign:',
+  fix:[['Lead source captured automatically','From the form, the call and the LSA, with no manual tagging.'],['Cost per signed job','Ad spend ÷ jobs won, not ÷ clicks.'],['Weekly report, Monday 9 AM','Spend, leads, visits and jobs by campaign.']]},
+ s_meta:{g:"ads",h:'Meta is cheap per lead. <em>Is it cheap per job?</em>',lede:'Social leads are often earlier in the decision. They need a different follow-up.',tier:'Hit or miss',n:0,c:"",body:'Track these, per ad set:',
+  fix:[['Lead quality score','Budget, timeline and project type at capture.'],['Longer nurture for early leads','Inspiration emails until they\'re ready.'],['Cost per signed job','So you can cut ad sets that never close.']]},
+ s_angi:{g:"ads",h:'Shared leads are a <em>speed race.</em>',lede:'Angi, Yelp and Thumbtack send the same lead to several contractors. First reply wins.',tier:'Shared',n:0,c:"",body:'Win the race and track it:',
+  fix:[['Instant reply to every shared lead','In seconds, before the others call.'],['Win rate by platform','Leads, visits and jobs per platform.'],['Cost per signed job','Fees ÷ jobs won, so you know what to keep.']]}
+};
+const q=new URLSearchParams(location.search);let k=q.get('k');if(!R[k])k='q_mid';
+const d=R[k],g=G[d.g],$=id=>document.getElementById(id);
+document.title=g.ey.charAt(0)+g.ey.slice(1).toLowerCase()+' | Process IQ Automation';
+$('ey').textContent=g.ey;$('h').innerHTML=d.h;$('lede').textContent=d.lede;$('tier').textContent=d.tier;$('metric').textContent=g.metric;$('body').textContent=d.body;
+const ga=$('gauge');if(d.n){[...ga.children].forEach((i,x)=>i.classList.toggle('on',x<d.n));ga.className='gauge '+d.c;}else ga.style.display='none';
+$('fix').innerHTML=d.fix.map(f=>`<li><div><b>${f[0]}</b><span>${f[1]}</span></div></li>`).join('');
+if(d.fields){$('fields').innerHTML=d.fields.map(f=>`<span>${f.replace('*','<i>*</i>').replace('→','<i>→</i>')}</span>`).join('');$('body').textContent='Fields on the form (* required):';$('fix').before($('fields'));$('fix').insertAdjacentHTML('beforebegin','<p style="margin:20px 0 0;font-weight:700">What each outcome triggers:</p>');}
+if(d.tpl){$('tpl').hidden=false;const t=d.tpl.replace('{first}','Mark');$('tplText').textContent=t;$('fix').before($('tpl'));$('body').textContent=d.body;
+ $('copy').onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(t).then(()=>{$('copy').textContent='Copied ✓';setTimeout(()=>$('copy').textContent='Copy text',1800);});};
+ $('fix').insertAdjacentHTML('beforebegin','<p style="margin:20px 0 0;font-weight:700">Why it works:</p>');}
+$('ctaH').textContent=g.cta[0];$('ctaP').textContent=g.cta[1];$('demo').textContent=g.cta[2];$('demo').href='/?utm_source=reno_result_page&utm_medium=referral&utm_content='+k+g.cta[3];
+$('pick').innerHTML=g.pick.map(p=>`<a href="?k=${p[0]}" aria-current="${p[0]===k}">${p[1]}</a>`).join('');
+</script>
+</body></html>
