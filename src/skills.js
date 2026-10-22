@@ -10,7 +10,7 @@ const S=[
    ${nc(500,OR,"!","New lead","Kitchen remodel · Irvine, CA","Budget $45–60K · via Google Ads","9:14 PM")}
    ${nc(1500,OAK,"✉","Text sent","“Hi Dana, thanks! Can we visit Sat?”","Personal, from the rep's number","9:14 PM")}
    ${nc(2600,GR,"✓","Visit booked","Saturday · 10:00 AM","Dana replied “Yes” · reminder set","9:16 PM")}
-   ${nc(3700,NAVY,"A","Assigned","Alex Rivera · Sales rep","On his calendar and in Salesforce","9:16 PM")}
+   ${nc(3700,NAVY,"A","Assigned","Alex Rivera · Sales rep","On his calendar and in the CRM","9:16 PM")}
    <div class="st badge" data-t="4700"><small>BOOKED IN</small><b>2 min 04 s</b></div>`},
  {k:"02 · AI lead scoring",tab:"AI lead scoring",img:"sk-ai.jpg",chip:"New lead calling",shade:"dark",dur:6800,
   h:"Knows which lead to call first.",
@@ -48,7 +48,7 @@ const S=[
    <div class="st ff" data-t="3300"><label>Outcome</label><div><span class="pill g">Sold</span><span style="font-size:12px;color:#5F6878">$21,400</span></div></div>
    <div class="st ff cond" data-t="4000"><label>Customer signature</label><div><svg class="sig" viewBox="0 0 120 22"><path d="M2 16 L14 5 L26 17 L40 4 L54 15 L74 7 L100 12"/></svg><span class="rule">IF sold</span></div></div>
    </div>
-   <div class="st badge" data-t="5100" style="align-self:flex-start"><small>SAVED TO SALESFORCE</small><b>0 fields retyped</b></div>`},
+   <div class="st badge" data-t="5100" style="align-self:flex-start"><small>SAVED TO CRM</small><b>0 fields retyped</b></div>`},
  {k:"05 · In-home visits",tab:"In-home visits",img:"sk-visit.jpg",chip:"In-home visit · 11:30 AM",shade:"light",dur:6400,
   h:"Every visit booked, confirmed and reported.",
   li:["24 h and 2 h reminders, plus “on my way” with an ETA","GPS check-in, photos and signature on site","Manager summary the moment the result is submitted"],

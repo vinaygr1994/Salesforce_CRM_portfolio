@@ -111,13 +111,13 @@ const svg=erd.querySelector("svg");const reduce=matchMedia("(prefers-reduced-mot
 const E=[...svg.querySelectorAll(".ee")],N=[...svg.querySelectorAll(".en")];
 E.forEach((e,i)=>{e.setAttribute("pathLength","1");e.style.animationDelay=(.5+i*.12)+"s";});
 N.forEach((n,i)=>n.style.animationDelay=(i*.08)+"s");
-const cap=document.createElement("div");cap.className="erd-cap";cap.innerHTML='<i id="erdI">1/9</i><b id="erdT">A web lead lands in Salesforce as a Lead.</b><button type="button" id="erdP" aria-label="Pause story">❚❚</button>';erd.appendChild(cap);
+const cap=document.createElement("div");cap.className="erd-cap";cap.innerHTML='<i id="erdI">1/9</i><b id="erdT">A web lead lands in the CRM as a Lead.</b><button type="button" id="erdP" aria-label="Pause story">❚❚</button>';erd.appendChild(cap);
 const NS="http://www.w3.org/2000/svg";
 const halo=document.createElementNS(NS,"circle");halo.setAttribute("r",11);halo.setAttribute("fill","rgba(242,107,58,.25)");
 const pk=document.createElementNS(NS,"circle");pk.setAttribute("r",5.5);pk.setAttribute("fill","#F26B3A");pk.setAttribute("stroke","#fff");pk.setAttribute("stroke-width","2");
 const pg=document.createElementNS(NS,"g");pg.append(halo,pk);pg.style.opacity=0;svg.appendChild(pg);
 // [edge index or -1, node index, caption]
-const ST=[[-1,0,"A web lead lands in Salesforce as a Lead."],
+const ST=[[-1,0,"A web lead lands in the CRM as a Lead."],
  [0,1,"Converted once: one Account and Contact, duplicates blocked."],
  [1,2,"An Opportunity tracks the deal value and stage."],
  [3,4,"The in-home Site Visit is booked and linked to the deal."],
