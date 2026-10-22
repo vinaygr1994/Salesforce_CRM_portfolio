@@ -62,6 +62,8 @@ const G={
   pick:[["r_low","Under 25"],["r_mid","25–100"],["r_high","100+"]]},
  after:{ey:"AFTER THE FINAL PAYMENT",metric:"FOLLOW-UP",cta:["See where this fits in the journey.","From first lead to repeat client, every step connected in one system.","See the full journey →","#lifecycle"],
   pick:[["a_nothing","Thanks and move on"],["a_sometimes","When we remember"],["a_system","We have a plan"]]},
+ ai:{ey:"AI LEAD SCORE",metric:"AI SCORE",cta:["Watch a lead get scored and routed.","Submit a test lead in the live demo and see the score, the rep it goes to and the first text.","Try the live demo →","#demo"],
+  pick:[["ai_hot","The $60K kitchen"],["ai_mid","The bathroom idea"],["ai_low","The roof patch"]]},
  ads:{ey:"YOUR LEAD SOURCE",metric:"TRACKING",cta:["See the sample dashboard.","Lead to job funnel and revenue by source, with illustrative numbers.","See the dashboard →","#dashboard"],
   pick:[["s_google","Google"],["s_meta","Meta"],["s_angi","Angi / Yelp"]]}
 };
@@ -108,6 +110,12 @@ const R={
   fix:[['Trigger on job completion','The sequence starts when the job is marked done.'],['Same timing every time','Day 1, 3 and 30, from the owner.'],['Yearly check-in','Maintenance tips and the next-project question.']]},
  a_system:{g:"after",h:'A plan puts you <em>ahead of most.</em>',lede:'Now measure it, so you know which touches bring work back.',tier:'Rare',n:4,c:"good",body:'Measure and grow it:',
   fix:[['Referral source on every lead','See which past clients send work.'],['Review rate by crew and rep','Spot your best finishers.'],['Repeat-project prompts','Kitchen clients often do the bath next.']]},
+ ai_hot:{g:"ai",h:'Score: <em>94, hot.</em> Call within 5 minutes.',lede:'"Need a full kitchen redo. Budget around $60K, hoping to start in January." Kitchen · Irvine · Google Ads',tier:'94 · Hot',n:5,c:"",body:'What the AI read, and what happened next:',
+  fix:[['Budget, timeline and area all fit','$60K kitchen, start under 3 months, inside your service ZIPs: +75.'],['Routed to the best-fit rep in seconds','Kitchen specialist with an open slot this week, alerted on his phone.'],['Personal text sent, visit offered','Two times to choose from, straight from the rep\'s calendar.']]},
+ ai_mid:{g:"ai",h:'Score: <em>41, nurture.</em> Not now, not never.',lede:'"How much does a bathroom remodel usually cost? Just getting ideas." Bathroom · Long Beach · Facebook',tier:'41 · Nurture',n:2,c:"mid",body:'What the AI read, and what happened next:',
+  fix:[['In area, but no budget or timeline','Early research, not ready for a sales call yet.'],['Sent your price-range guide automatically','Real ranges for your area, plus 3 finished bathrooms.'],['Re-scored when they come back','Opens the guide twice or asks about dates? The rep is alerted.']]},
+ ai_low:{g:"ai",h:'Score: <em>18, low fit.</em> No rep time spent.',lede:'"What\'s your cheapest price to patch a small roof leak?" Roof patch · Reno, NV · Angi',tier:'18 · Low fit',n:1,c:"good",body:'What the AI read, and what happened next:',
+  fix:[['Outside your service area','Reno, NV is outside the ZIPs you serve.'],['Small repair, price-first','Below your minimum job size.'],['Polite auto-reply with a referral','Your brand stays friendly, and your reps stay on real jobs.']]},
  s_google:{g:"ads",h:'Google brings volume. <em>Does it bring jobs?</em>',lede:'Clicks and calls are easy to count. Signed jobs per campaign is the number that matters.',tier:'Most used',n:0,c:"",body:'Track these, per campaign:',
   fix:[['Lead source captured automatically','From the form, the call and the LSA, with no manual tagging.'],['Cost per signed job','Ad spend ÷ jobs won, not ÷ clicks.'],['Weekly report, Monday 9 AM','Spend, leads, visits and jobs by campaign.']]},
  s_meta:{g:"ads",h:'Meta is cheap per lead. <em>Is it cheap per job?</em>',lede:'Social leads are often earlier in the decision. They need a different follow-up.',tier:'Hit or miss',n:0,c:"",body:'Track these, per ad set:',
