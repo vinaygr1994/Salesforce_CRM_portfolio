@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Your Lead Reply Speed | Process IQ Automation</title>
+<meta name="robots" content="noindex"/>
+<link rel="icon" type="image/png" sizes="32x32" href="https://processiqautomation.com/favicon-32.png"/>
+<link rel="stylesheet" href="_shared.css"/>
+<style>
+.gauge{display:flex;gap:6px;margin:0 0 18px}
+.gauge i{flex:1;height:8px;border-radius:4px;background:#E7E0D3}
+.gauge i.on{background:var(--clay)}
+.gauge.good i.on{background:#4A7C59}
+.score{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.score b{font:400 26px/1.2 Georgia,serif;color:var(--green)}
+.score span{font:700 11px/1 Arial,sans-serif;letter-spacing:1.6px;color:var(--muted)}
+ol.fix{list-style:none;margin:18px 0 0;padding:0;counter-reset:f}
+ol.fix li{counter-increment:f;display:grid;grid-template-columns:34px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+ol.fix li::before{content:counter(f);width:28px;height:28px;border-radius:50%;background:var(--sage);color:var(--green);font:700 13px/28px Arial,sans-serif;text-align:center}
+ol.fix b{display:block}
+ol.fix span{color:var(--muted);font-size:14.5px}
+</style></head>
+<body><main>
+<a class="brand" href="https://www.processiqautomation.com/"><span>PROCESS IQ <small>AUTOMATION</small></span></a>
+<p class="eyebrow">YOUR 10-SECOND CHECK</p>
+<h1 id="h"></h1>
+<p class="lede" id="lede"></p>
+<section class="card" aria-live="polite">
+<div class="score"><b id="tier"></b><span>REPLY SPEED</span></div>
+<div class="gauge" id="gauge"><i></i><i></i><i></i><i></i><i></i></div>
+<p id="body" style="margin:0"></p>
+<ol class="fix" id="fix"></ol>
+</section>
+<section class="dark">
+<h2>See it reply in 38 seconds.</h2>
+<p>Submit a test lead in the live demo and watch it get routed, texted and booked.</p>
+<div class="row"><a class="btn lt" id="demo" href="/#demo">Try the live demo &rarr;</a><a class="ghost" href="https://www.processiqautomation.com/contact">Book a 15-min call</a></div>
+</section>
+<div class="picker"><p>Not quite right? Pick another answer:</p>
+<a href="?r=fast" data-r="fast">Under 5 min</a><a href="?r=same" data-r="same">Same day</a><a href="?r=next" data-r="next">Next day or later</a></div>
+<p class="foot">Vinay Kumar Gaur · Process IQ Automation · <a href="/">See the full Salesforce build for contractors</a></p>
+</main>
+<script>
+const R={
+ fast:{h:'Fast. Now make it <em>every</em> lead.',lede:'Replying within minutes puts you ahead of most remodelers. The gap is usually nights, weekends and busy site days.',tier:'Ahead of most',n:4,good:true,
+  body:'Keep your speed when nobody is at the desk:',
+  fix:[['After-hours auto-reply','A personal text and email the moment a form comes in, signed by the rep.'],['Self-booking link','Homeowners pick a visit slot from your rep\'s real calendar.'],['Missed-call text-back','Every missed call gets a text within a minute.']]},
+ same:{h:'Same day is where <em>jobs slip.</em>',lede:'By the time you call back, many homeowners have already booked whoever answered first.',tier:'Room to win',n:2,good:false,
+  body:'Three changes that close the gap without hiring:',
+  fix:[['Instant reply','Every web, ad and Angi lead gets a personal text in under a minute.'],['Auto-routing','The right rep is assigned by area and trade, and alerted on their phone.'],['Visit booking by text','The homeowner books the in-home visit straight from the reply.']]},
+ next:{h:'Next day means <em>someone else</em> got the visit.',lede:'That isn\'t a work-ethic problem. Remodelers are on site all day. It\'s a system problem, and it\'s the cheapest one to fix.',tier:'Biggest upside',n:1,good:false,
+  body:'Start with the one change that pays for itself first:',
+  fix:[['Reply in seconds, automatically','A personal text and email the moment the lead arrives, day or night.'],['One place for every lead','Web forms, ads, calls and referrals in one list, with no duplicates.'],['A nudge your team can\'t miss','If nobody has called within 15 minutes, the manager gets an alert.']]}
+};
+const q=new URLSearchParams(location.search);let r=q.get('r');if(!R[r])r='same';const d=R[r];
+document.getElementById('h').innerHTML=d.h;document.getElementById('lede').textContent=d.lede;
+document.getElementById('tier').textContent=d.tier;document.getElementById('body').textContent=d.body;
+const g=document.getElementById('gauge');[...g.children].forEach((i,k)=>i.classList.toggle('on',k<d.n));g.classList.toggle('good',d.good);
+document.getElementById('fix').innerHTML=d.fix.map(f=>`<li><div><b>${f[0]}</b><span>${f[1]}</span></div></li>`).join('');
+document.querySelectorAll('.picker a').forEach(a=>{a.setAttribute('aria-current',a.dataset.r===r);a.href='?r='+a.dataset.r+(q.get('utm_campaign')?'&utm_campaign='+encodeURIComponent(q.get('utm_campaign')):'');});
+document.getElementById('demo').href='/?utm_source=reno_speed_page&utm_medium=referral#demo';
+</script>
+</body></html>
