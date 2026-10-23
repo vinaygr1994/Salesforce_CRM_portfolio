@@ -1,0 +1,65 @@
+/* ===== Integrations ===== */
+.ig{background:radial-gradient(900px 500px at 50% 0%,rgba(242,107,58,.16),transparent 60%),#1E2A44;color:#fff;position:relative;overflow:hidden}
+.ig::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:22px 22px;pointer-events:none}
+.ig .wrap{position:relative}
+.ig .kicker{color:#FFB48F}.ig .kicker::before{background:#FFB48F}
+.ig h2{color:#fff}.ig .lead{color:#C3CCDB}
+.ig-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:28px 0 30px;max-width:720px}
+.ig-stats div{border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px 16px;background:rgba(255,255,255,.04)}
+.ig-stats b{display:block;font-family:var(--display);font-size:34px;line-height:1.1;color:#FFB48F}
+.ig-stats span{font-size:13px;color:#C3CCDB}
+.ig-hub{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1fr);gap:60px;align-items:center;padding:26px;border:1px solid rgba(255,255,255,.1);border-radius:20px;background:rgba(10,16,30,.35)}
+.ig-h{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#93A3BC;margin:0 0 12px}
+.ig-col ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;position:relative;z-index:2}
+.ig-col li{--c:#F26B3A;display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-size:13.5px;font-weight:600;transition:background .3s,border-color .3s,transform .3s,box-shadow .3s}
+.ig-col li i{flex:none;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font:700 11px var(--body);font-style:normal;color:#fff;background:var(--c)}
+.ig-col li small{display:block;font-weight:500;font-size:11px;color:#93A3BC}
+.ig-out li{flex-direction:row-reverse;text-align:right}
+.ig-col li.hot{background:rgba(255,255,255,.14);border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent);transform:scale(1.03)}
+.ig-core{display:flex;flex-direction:column;align-items:center;gap:22px;position:relative;z-index:2}
+.ig-orb{position:relative;width:170px;height:170px;display:grid;place-items:center}
+.ig-orb>i{position:absolute;inset:0;border-radius:50%;border:1.5px dashed rgba(255,180,143,.45);animation:igspin 26s linear infinite}
+.ig-orb>i+i{inset:16px;border:1px solid rgba(255,255,255,.15);animation-duration:40s;animation-direction:reverse}
+@keyframes igspin{to{transform:rotate(360deg)}}
+.ig-orb span{width:120px;height:120px;border-radius:50%;background:linear-gradient(145deg,#F26B3A,#C94F22);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 20px 50px -15px rgba(242,107,58,.7);transition:transform .3s}
+.ig-orb span svg{width:24px;height:24px;margin-bottom:2px}
+.ig-orb b{font:700 22px var(--display);line-height:1}
+.ig-orb small{font-size:10px;color:#FFE3D5;max-width:90px;line-height:1.25;margin-top:3px}
+.ig-orb.pulse span{animation:igpulse .5s ease}
+@keyframes igpulse{40%{transform:scale(1.08);box-shadow:0 0 0 14px rgba(242,107,58,.18),0 20px 50px -15px rgba(242,107,58,.7)}}
+.ig-feed{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px 14px}
+.ig-feed ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;min-height:118px}
+.ig-feed li{font:500 12px/1.4 var(--mono);color:#DDE4EF;display:flex;gap:8px;align-items:baseline;animation:igin .45s ease}
+.ig-feed li em{font-style:normal;color:#93A3BC;flex:none}
+.ig-feed li b{color:#FFB48F;font-weight:600}
+@keyframes igin{from{opacity:0;transform:translateY(-6px)}}
+.ig-svg{position:absolute!important;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
+.ig-svg path.ln{fill:none;stroke:rgba(255,255,255,.12);stroke-width:1.5}
+.ig-svg path.ln.on{stroke:rgba(255,180,143,.55);stroke-dasharray:4 6;animation:igdash .8s linear infinite}
+@keyframes igdash{to{stroke-dashoffset:-20}}
+.ig-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:28px}
+.ig-cat{border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;background:rgba(255,255,255,.04);transition:border-color .3s,background .3s,transform .3s}
+.ig-cat:hover{border-color:rgba(255,180,143,.5);background:rgba(255,255,255,.07);transform:translateY(-3px)}
+.ig-cat h3{font-size:16px;color:#fff;margin:0 0 4px;display:flex;align-items:center;gap:8px;font-family:var(--body)}
+.ig-cat h3 span{font-size:17px}
+.ig-cat p{font-size:12.5px;color:#93A3BC;margin:0 0 10px}
+.ig-cat div{display:flex;flex-wrap:wrap;gap:6px}
+.ig-cat div span{font-size:12px;font-weight:600;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.08);color:#E8EDF5;border:1px solid rgba(255,255,255,.08)}
+.ig-note{margin:18px 0 0;font-size:12px;color:#7D8DA6}
+.ig-marq{background:#1E2A44;color:#DDE4EF;overflow:hidden;padding:13px 0;border-top:1px solid rgba(255,255,255,.08)}
+.ig-marq>div{display:flex;gap:34px;white-space:nowrap;width:max-content;animation:igmq 45s linear infinite;font:600 14px var(--body)}
+.ig-marq em{font-style:normal;color:#FFB48F;font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;align-self:center}
+.ig-marq span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#F26B3A;margin-right:10px;vertical-align:middle}
+@keyframes igmq{to{transform:translateX(-50%)}}
+@media (max-width:1080px){.ig-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+ .ig-hub{grid-template-columns:minmax(0,1fr);gap:22px;padding:16px}
+ .ig-svg{display:none}
+ .ig-col ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .ig-out li{flex-direction:row;text-align:left}
+ .ig-core{order:0}
+ .ig-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .ig-stats b{font-size:26px}
+}
+@media (max-width:520px){.ig-grid{grid-template-columns:minmax(0,1fr)}.ig-col li{font-size:12.5px;padding:7px 8px}.ig-col li small{display:none}}
+@media (prefers-reduced-motion:reduce){.ig-orb>i,.ig-marq>div,.ig-svg path.ln.on{animation:none}}
