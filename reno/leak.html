@@ -24,7 +24,8 @@
 .yr{display:flex;justify-content:space-between;gap:12px;background:var(--sage);border-radius:10px;padding:14px 16px;font-size:14.5px}
 .yr b{font:400 22px/1.2 Georgia,serif;color:var(--green);font-variant-numeric:tabular-nums}
 .note{font-size:12.5px;color:var(--muted);margin:14px 0 0}
-</style></head>
+</style><script src="region.js"></script>
+</head>
 <body><main>
 <a class="brand" href="https://www.processiqautomation.com/"><span>PROCESS IQ <small>AUTOMATION</small></span></a>
 <p class="eyebrow">WHAT A SLOW REPLY COSTS</p>
@@ -48,13 +49,16 @@
 <section class="dark">
 <h2>Close the gap automatically.</h2>
 <p>Every lead gets a personal reply in seconds, a booked visit and an alerted rep, day or night.</p>
-<div class="row"><a class="btn lt" href="/?utm_source=reno_leak_page&utm_medium=referral#demo">See it in the live demo &rarr;</a><a class="ghost" href="https://www.processiqautomation.com/contact">Book a 15-min call</a></div>
+<div class="row"><a class="btn lt" href="/?utm_source=reno_leak_page&utm_medium=referral#demo">See it in the live demo &rarr;</a><a class="ghost" href="/#enquire">Book a 15-min call</a></div>
 </section>
 <p class="foot">Vinay Kumar Gaur · Process IQ Automation · <a href="/">See the full Salesforce build for contractors</a></p>
 </main>
 <script>
 const J={bath:25000,kitchen:55000,addition:150000};
-const q=new URLSearchParams(location.search);let j=q.get('job');if(!J[j])j='kitchen';
+if(window.RG==='on'){J.bath=30000;J.kitchen=65000;J.addition=70000;
+ const t=document.querySelectorAll('.jobs a span');if(t.length===3){t[0].innerHTML='BATHROOM<b>$30K</b>';t[1].innerHTML='KITCHEN<b>$65K</b>';t[2].innerHTML='BASEMENT<b>$70K</b>';}
+ const im=document.querySelector('.jobs a[data-j=addition] img');if(im)im.alt='Finished basement';}
+const q=new URLSearchParams(location.search);let j=q.get('job');if(j==='basement')j='addition';if(!J[j])j='kitchen';
 const $=id=>document.getElementById(id);
 const usd=v=>'$'+Math.round(v).toLocaleString('en-US');
 $('val').value=J[j];
